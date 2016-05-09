@@ -20,7 +20,7 @@ public class CustomDottedProgressBar extends View {
 
     private Paint mPaintFill = new Paint(Paint.ANTI_ALIAS_FLAG);    //For filling color in dots
     private Handler mHandler = new Handler();                       //Handler to jump tp next dot
-    private int mIndex = -1;                                        //Starting index for loop
+    private int mCurrentDotIndex = -1;                              //Starting index for loop
     private int mViewWidth,                                         //Custom View's Width
                 mViewHeight;                                        //Custom View's Height
     private int margin = 10;                                        //Margin for all dots
@@ -57,7 +57,7 @@ public class CustomDottedProgressBar extends View {
     }
 
     public void startForward() {
-        mIndex = -1;
+        mCurrentDotIndex = -1;
         mHandler.removeCallbacks(mStartSingleRunnable);
         if (repeatInfiniteTimes){
             mHandler.post(mStartInfiniteRunnable);
@@ -80,7 +80,7 @@ public class CustomDottedProgressBar extends View {
         @Override
         public void run() {
             int step = 1;
-            mIndex += step;
+            mCurrentDotIndex += step;
             invalidate();
             mHandler.postDelayed(mStartSingleRunnable, 300);
         }
@@ -91,12 +91,12 @@ public class CustomDottedProgressBar extends View {
         @Override
         public void run() {
             int step = 1;
-            mIndex += step;
-            if (mIndex < 0) {
-                mIndex = 1;
+            mCurrentDotIndex += step;
+            if (mCurrentDotIndex < 0) {
+                mCurrentDotIndex = 1;
                 step = 1;
-            } else if (mIndex > (mDotCount - 1)) {
-                mIndex = 0;
+            } else if (mCurrentDotIndex > (mDotCount - 1)) {
+                mCurrentDotIndex = 0;
                 step = 1;
             }
             invalidate();
@@ -121,7 +121,7 @@ public class CustomDottedProgressBar extends View {
         float xCoordinate = (mViewWidth - mDotCount * mInActiveDotsRadius * 2 - (mDotCount - 1) * margin) / 2.0f;
         float yCoordinate = mViewHeight / 2;
         for (int i = 0; i < mDotCount; i++) {
-            if (i == mIndex) {
+            if (i == mCurrentDotIndex) {
                 canvas.drawCircle(xCoordinate, yCoordinate, mActiveDotsRadius, mPaintFill);
             } else {
                 canvas.drawCircle(xCoordinate, yCoordinate, mInActiveDotsRadius, mPaintFill);
