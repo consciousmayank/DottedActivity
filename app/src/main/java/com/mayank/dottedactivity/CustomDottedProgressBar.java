@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Created by emb-mayajos on 9/5/16.
+ * Created by Mayank Joshi on 9/5/16.
  */
 public class CustomDottedProgressBar extends View {
 
