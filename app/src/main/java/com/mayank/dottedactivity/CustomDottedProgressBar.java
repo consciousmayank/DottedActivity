@@ -23,7 +23,7 @@ public class CustomDottedProgressBar extends View {
     private int mIndex = -1;                                        //Starting index for loop
     private int mViewWidth,                                         //Custom View's Width
                 mViewHeight;                                        //Custom View's Height
-    private int margin = 20;                                        //Margin for all dots
+    private int margin = 10;                                        //Margin for all dots
     private int mDotCount;                                          //Number of dots to be shown
     private boolean repeatInfiniteTimes;
 
@@ -38,7 +38,7 @@ public class CustomDottedProgressBar extends View {
         try {
             mDotCount = a.getInteger(R.styleable.DottedProgressBar_dotsCount, 3);
             repeatInfiniteTimes = a.getBoolean(R.styleable.DottedProgressBar_infinite, false);
-            mInActiveDotsRadius = 30;
+            mInActiveDotsRadius = 10;
             mActiveDotsRadius = mInActiveDotsRadius + 5;
         } finally {
             a.recycle();
@@ -68,7 +68,11 @@ public class CustomDottedProgressBar extends View {
 
 
     public void stop() {
-        mHandler.removeCallbacks(mStartSingleRunnable);
+        if (repeatInfiniteTimes){
+            mHandler.removeCallbacks(mStartInfiniteRunnable);
+        }else{
+            mHandler.removeCallbacks(mStartSingleRunnable);
+        }
     }
 
     private Runnable mStartSingleRunnable = new Runnable() {
