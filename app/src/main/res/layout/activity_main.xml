@@ -15,10 +15,12 @@
 
     <com.mayank.dottedactivity.CustomDottedProgressBar
         android:id="@+id/dotsProgressBar"
-        android:layout_centerInParent="true"
-        android:layout_width="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:dotsCount="4"
+        app:dotsCount="3"
+        app:infinite="true"
         android:paddingTop="@dimen/activity_vertical_margin" />
 
     <LinearLayout
