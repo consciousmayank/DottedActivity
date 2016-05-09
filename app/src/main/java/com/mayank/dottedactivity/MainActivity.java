@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
+/**
+ * Created by Mayank Joshi on 9/5/16.
+ */
 public class MainActivity extends AppCompatActivity {
 
     Button startButton, hideButton;
